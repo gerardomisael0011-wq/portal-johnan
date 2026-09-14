@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ nombre_area }} | Johnan de México</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         HEADER
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="header-container">
+
+            <a href="/" class="logo-container">
+
+                <img
+                    src="{{ url_for('static', filename='img/logo.png') }}"
+                    alt="Johnan de México"
+                    class="logo">
+
+            </a>
+
+
+            <nav class="nav">
+
+                <a href="/">
+                    Inicio
+                </a>
+
+                <a href="/#areas">
+                    Áreas
+                </a>
+
+                <a href="/#avisos">
+                    Avisos
+                </a>
+
+                <a href="/#eventos">
+                    Eventos
+                </a>
+
+            </nav>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =====================================================
+         HERO DEL ÁREA
+    ====================================================== -->
+
+    <section class="area-page-hero">
+
+        <div class="area-page-hero-content">
+
+
+            <a href="/#areas" class="back-button">
+
+                ← Regresar a áreas
+
+            </a>
+
+
+            <span class="area-page-label">
+
+                DEPARTAMENTO
+
+            </span>
+
+
+            <h1>
+
+                {{ nombre_area }}
+
+            </h1>
+
+
+            <p>
+
+                {{ area.descripcion }}
+
+            </p>
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         INFORMACIÓN DEL ÁREA
+    ====================================================== -->
+
+    <section class="area-information">
+
+        <div class="container">
+
+
+            <div class="area-section-title">
+
+                <span>
+                    INFORMACIÓN
+                </span>
+
+                <h2>
+                    Conoce nuestro departamento
+                </h2>
+
+                <p>
+                    Información general de {{ nombre_area }}.
+                </p>
+
+            </div>
+
+
+
+            <div class="area-info-grid">
+
+
+                <!-- ¿Qué hacemos? -->
+
+                <div class="area-info-card">
+
+                    <div class="area-info-icon">
+                        ✓
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            ¿Qué hacemos?
+                        </h3>
+
+                        <p>
+                            {{ area.descripcion }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Objetivo -->
+
+                <div class="area-info-card">
+
+                    <div class="area-info-icon">
+                        ◎
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Objetivo
+                        </h3>
+
+                        <p>
+                            {{ area.objetivo }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Ubicación -->
+
+                <div class="area-info-card">
+
+                    <div class="area-info-icon">
+                        📍
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Ubicación
+                        </h3>
+
+                        <p>
+                            {{ area.ubicacion }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+
+                <!-- Contacto -->
+
+                <div class="area-info-card">
+
+                    <div class="area-info-icon">
+                        ✉
+                    </div>
+
+                    <div>
+
+                        <h3>
+                            Contacto
+                        </h3>
+
+                        <p>
+                            {{ area.contacto }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         SUBCATEGORÍAS
+    ====================================================== -->
+
+    <section class="area-subcategories">
+
+        <div class="container">
+
+
+            <div class="area-section-title">
+
+                <span>
+                    ÁREAS DE TRABAJO
+                </span>
+
+                <h2>
+                    ¿Qué encontrarás aquí?
+                </h2>
+
+                <p>
+                    Conoce las principales funciones y actividades
+                    relacionadas con {{ nombre_area }}.
+                </p>
+
+            </div>
+
+
+
+            <div class="subcategory-grid">
+
+
+                {% for subcategoria in area.subcategorias %}
+
+
+                <div class="subcategory-card">
+
+
+                    <div class="subcategory-number">
+
+                        {{ "%02d"|format(loop.index) }}
+
+                    </div>
+
+
+                    <div class="subcategory-arrow">
+
+                        →
+
+                    </div>
+
+
+                    <h3>
+
+                        {{ subcategoria.nombre }}
+
+                    </h3>
+
+
+                    <p>
+
+                        {{ subcategoria.descripcion }}
+
+                    </p>
+
+
+                </div>
+
+
+                {% endfor %}
+
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         PERSONAL
+    ====================================================== -->
+
+    <section class="area-personnel">
+
+        <div class="container">
+
+
+            <div class="area-section-title">
+
+                <span>
+                    NUESTRO EQUIPO
+                </span>
+
+                <h2>
+                    Personal del departamento
+                </h2>
+
+                <p>
+                    Conoce a las personas que forman parte de
+                    {{ nombre_area }}.
+                </p>
+
+            </div>
+
+
+
+            {% if area.personal %}
+
+
+                <div class="personnel-grid">
+
+
+                    {% for persona in area.personal %}
+
+
+                    <div class="person-card">
+
+
+                        <div class="person-photo">
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename='img/personal/' + persona.foto
+                                ) }}"
+                                alt="{{ persona.nombre }}">
+
+                        </div>
+
+
+
+                        <div class="person-info">
+
+
+                            <span>
+
+                                {{ persona.puesto }}
+
+                            </span>
+
+
+                            <h3>
+
+                                {{ persona.nombre }}
+
+                            </h3>
+
+
+                            <p>
+
+                                {{ persona.descripcion }}
+
+                            </p>
+
+
+                            <button
+                                class="person-button"
+                                type="button">
+
+                                Ver perfil →
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    {% endfor %}
+
+
+                </div>
+
+
+            {% else %}
+
+
+                <div class="personnel-empty">
+
+                    <div class="personnel-empty-icon">
+                        👥
+                    </div>
+
+                    <h3>
+                        Personal por registrar
+                    </h3>
+
+                    <p>
+                        Próximamente podrás conocer al equipo
+                        que forma parte de este departamento.
+                    </p>
+
+                </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </section>
+
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="footer">
+
+        <div class="footer-container">
+
+
+            <div>
+
+                <h3>
+                    Johnan de México
+                </h3>
+
+                <p>
+                    Portal corporativo
+                </p>
+
+            </div>
+
+
+            <div>
+
+                <p>
+                    © 2026 Johnan de México.
+                    Todos los derechos reservados.
+                </p>
+
+            </div>
+
+
+        </div>
+
+    </footer>
+
+
+
+    <!-- =====================================================
+         JAVASCRIPT
+    ====================================================== -->
+
+    <script
+        src="{{ url_for('static', filename='js/app.js') }}">
+    </script>
+
+
+</body>
+
+</html>
